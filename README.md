@@ -41,7 +41,7 @@ This project implements a sophisticated quantitative trading system that:
 
 ### Prerequisites
 ```bash
-pip install polars yfinance numpy matplotlib xgboost lightgbm catboost tensorflow
+pip install polars yfinance numpy matplotlib
 ```
 
 ### Usage
