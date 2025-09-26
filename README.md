@@ -1,16 +1,17 @@
 # Monte Carlo Portfolio Simulation
 
-A quantitative finance project that combines machine learning with Monte Carlo simulation for portfolio risk assessment and optimization.
+A simple quantitative finance system that combines technical analysis, machine learning, and Monte Carlo simulation for portfolio risk assessment and optimization.
 
-## 🎯 Project Overview
+## Project Overview
 
 This project implements a sophisticated quantitative trading system that:
-- Downloads and processes historical stock data
-- Generates technical indicators and features
-- Uses machine learning to predict future returns
+- Downloads and processes 5 years of historical stock data (2020-2024)
+- Generates comprehensive technical indicators and ML features
+- Trains PyTorch models to predict short-term price movements (5-day returns)
 - Performs Monte Carlo simulation for portfolio risk modeling
+- Provides a complete framework for quantitative trading strategies
 
-## 📊 Data & Features
+## Data & Features
 
 ### Stock Universe
 - **10 Major Stocks**: AAPL, GOOG, MSFT, AMZN, TSLA, META, NFLX, NVDA, ADBE, CSCO
@@ -18,13 +19,14 @@ This project implements a sophisticated quantitative trading system that:
 - **Data Source**: Yahoo Finance via `yfinance`
 
 ### Technical Indicators
-- **Moving Averages**: 10-day and 30-day
-- **Momentum**: 20-day and 60-day momentum
+- **Moving Averages**: 10-day and 30-day with crossover signals
+- **Momentum**: 20-day and 60-day momentum calculations
 - **Volatility**: 20-day rolling standard deviation
 - **RSI**: 14-day Relative Strength Index
 - **Trading Signals**: Moving average crossover signals
+- **Target Variables**: 5-day forward returns for ML training
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 ├── data_handling.py      # Data download and preprocessing
@@ -37,11 +39,11 @@ This project implements a sophisticated quantitative trading system that:
 └── config.py             # Configuration settings
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 ```bash
-pip install polars yfinance numpy matplotlib xgboost lightgbm catboost tensorflow
+pip install polars yfinance numpy matplotlib torch scikit-learn
 ```
 
 ### Usage
@@ -83,9 +85,11 @@ pip install polars yfinance numpy matplotlib xgboost lightgbm catboost tensorflo
 - Visualizes portfolio value evolution
 
 ### Machine Learning Pipeline (`ml_pipeline.py`)
-- Framework for multiple ML models (XGBoost, LightGBM, CatBoost, Neural Networks)
-- Ready for integration with feature engineering
-- Will generate portfolio weights for Monte Carlo simulation
+- **PyTorch Logistic Regression** for binary classification
+- **Target**: Predicts if stock will have >1% return in next 5 days
+- **Features**: All technical indicators from features.py
+- **Methodology**: Time-series aware train/test split (no lookahead bias)
+- **Evaluation**: Training curves, accuracy metrics, classification reports
 
 ## 📈 Monte Carlo Methodology
 
@@ -98,34 +102,28 @@ The simulation uses:
 ## 🛠️ Technology Stack
 
 - **Data Processing**: Polars (high-performance alternative to pandas)
-- **Data Source**: Yahoo Finance
-- **Machine Learning**: XGBoost, LightGBM, CatBoost, TensorFlow
+- **Data Source**: Yahoo Finance via `yfinance`
+- **Machine Learning**: PyTorch (custom neural networks)
+- **Feature Engineering**: Polars (efficient rolling calculations)
 - **Visualization**: Matplotlib
 - **Statistical Analysis**: NumPy
+- **ML Evaluation**: Scikit-learn (metrics and preprocessing)
 
 ## 📋 Current Status
 
-- ✅ **Data Pipeline**: Complete and optimized
-- ✅ **Feature Engineering**: Full technical indicator suite
-- ✅ **Monte Carlo Simulation**: Fully functional
-- 🚧 **ML Pipeline**: Framework ready for implementation
-- ⏳ **Integration**: ML weights → Portfolio optimization
+- ✅ **Data Pipeline**: Complete and optimized (5 years of data)
+- ✅ **Feature Engineering**: Full technical indicator suite with RSI, MA, momentum
+- ✅ **ML Pipeline**: Complete PyTorch training pipeline with evaluation
+- ✅ **Monte Carlo Simulation**: Fully functional risk modeling
+- 🚧 **Integration**: ML predictions → Portfolio weights → MC simulation
+- ⏳ **Backtesting**: Historical validation framework
+- ⏳ **Portfolio Optimization**: Risk-adjusted weight optimization
 
-## 🎯 Next Steps
+## Next Steps
 
-1. Complete machine learning model training
-2. Generate portfolio weights from ML predictions
-3. Integrate ML weights into Monte Carlo simulation
-4. Implement backtesting for model validation
-5. Add portfolio optimization algorithms
+1. **Connect ML to Portfolio**: Convert ML predictions to portfolio weights
+2. **Integrate with Monte Carlo**: Feed ML weights into risk simulation
+3. **Implement Backtesting**: Historical validation of ML models
+4. **Portfolio Optimization**: Risk-adjusted weight optimization algorithms
+5. **Performance Metrics**: Sharpe ratio, maximum drawdown, etc.
 
-## 📝 Notes
-
-- Uses Polars instead of pandas for better performance
-- Forward-fills missing values to avoid lookahead bias
-- Equal weights currently used (waiting for ML optimization)
-- Designed for quantitative finance applications
-
-## 🤝 Contributing
-
-This is a quantitative finance research project focused on portfolio optimization and risk management.
