@@ -29,6 +29,7 @@ This project implements a sophisticated quantitative trading system that:
 ## Project Structure
 
 ```
+├── main.py               # Main pipeline orchestration (5-step process)
 ├── data_handling.py      # Data download and preprocessing
 ├── features.py           # Technical indicator calculations
 ├── mc_simulation.py      # Monte Carlo portfolio simulation
@@ -48,24 +49,40 @@ pip install polars yfinance numpy matplotlib torch scikit-learn
 
 ### Usage
 
-1. **Data Processing**:
+1. **Run Complete Pipeline**:
    ```python
+   python main.py
+   ```
+   This executes the full 5-step quantitative trading pipeline:
+   - Data collection and preprocessing
+   - Feature engineering with technical indicators
+   - Machine learning model training
+   - Prediction analysis and portfolio weight generation
+   - Results saving (model, scaler, weights)
+
+2. **Individual Components**:
+   ```python
+   # Data Processing
    python data_handling.py
-   ```
-
-2. **Feature Engineering**:
-   ```python
+   
+   # Feature Engineering
    from features import features
-   # Apply technical indicators to your data
-   ```
-
-3. **Monte Carlo Simulation**:
-   ```python
+   
+   # Monte Carlo Simulation
    from mc_simulation import run_mc
    run_mc()  # Run 10,000 portfolio simulations
    ```
 
-## 🔧 Key Components
+## Key Components
+
+### Main Pipeline (`main.py`)
+- **5-Step Orchestrated Process**: Complete quantitative trading pipeline
+- **Data Collection**: Downloads 10 major stocks (2020-2024) using yfinance
+- **Feature Engineering**: Creates technical indicators (MA, momentum, volatility, RSI)
+- **ML Training**: Trains PyTorch logistic regression for 5-day return prediction
+- **Portfolio Generation**: Converts ML predictions to portfolio weights
+- **Results Saving**: Saves trained models and weights with timestamps
+- **Clean Output**: Professional console output without emojis
 
 ### Data Processing (`data_handling.py`)
 - Downloads stock data using `yfinance`
@@ -91,7 +108,7 @@ pip install polars yfinance numpy matplotlib torch scikit-learn
 - **Methodology**: Time-series aware train/test split (no lookahead bias)
 - **Evaluation**: Training curves, accuracy metrics, classification reports
 
-## 📈 Monte Carlo Methodology
+## Monte Carlo Methodology
 
 The simulation uses:
 - **Multivariate Normal Distribution** for daily returns
@@ -99,7 +116,7 @@ The simulation uses:
 - **10,000 simulations** for robust statistical analysis
 - **252 trading days** (1 year) projection horizon
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Data Processing**: Polars (high-performance alternative to pandas)
 - **Data Source**: Yahoo Finance via `yfinance`
@@ -109,15 +126,16 @@ The simulation uses:
 - **Statistical Analysis**: NumPy
 - **ML Evaluation**: Scikit-learn (metrics and preprocessing)
 
-## 📋 Current Status
+## Current Status
 
-- ✅ **Data Pipeline**: Complete and optimized (5 years of data)
-- ✅ **Feature Engineering**: Full technical indicator suite with RSI, MA, momentum
-- ✅ **ML Pipeline**: Complete PyTorch training pipeline with evaluation
-- ✅ **Monte Carlo Simulation**: Fully functional risk modeling
-- 🚧 **Integration**: ML predictions → Portfolio weights → MC simulation
-- ⏳ **Backtesting**: Historical validation framework
-- ⏳ **Portfolio Optimization**: Risk-adjusted weight optimization
+- **Data Pipeline**: Complete and optimized (5 years of data)
+- **Feature Engineering**: Full technical indicator suite with RSI, MA, momentum
+- **ML Pipeline**: Complete PyTorch training pipeline with evaluation
+- **Main Pipeline**: Fully orchestrated 5-step process with clean output
+- **Monte Carlo Simulation**: Fully functional risk modeling
+- **Integration**: ML predictions → Portfolio weights → MC simulation
+- **Backtesting**: Historical validation framework (in progress)
+- **Portfolio Optimization**: Risk-adjusted weight optimization (in progress)
 
 ## Next Steps
 
